@@ -1,9 +1,12 @@
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { FC } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import FABButton from "../Components/FABButton";
 import ListItem from "../Components/ListItem";
+import { StackScreen } from "../helpers/types";
 
-export const ItemsScreen: FC = () => {
+interface IProps extends NativeStackScreenProps<StackScreen, "Items"> {}
+export const ItemsScreen: FC<IProps> = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.topBar}>
@@ -12,13 +15,13 @@ export const ItemsScreen: FC = () => {
         <Text>Price</Text>
       </View>
       <View style={styles.listContainer}>
-      <ListItem />
+        <ListItem />
       </View>
       <Text style={styles.empyListText}>
         You do not have any products. Press the green button below to add a new
         one.
       </Text>
-      <FABButton />
+      <FABButton onPress={() => props.navigation.navigate("Products")} />
     </View>
   );
 };
@@ -31,22 +34,22 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   topBar: {
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     flexDirection: "row",
-    width: '100%',
-    borderBottomColor: 'black',
+    width: "100%",
+    borderBottomColor: "black",
     borderBottomWidth: 1,
-    padding: 5
+    padding: 5,
   },
   listContainer: {
-   flex: 4,
-   width: '100%',
-   padding: 5
+    flex: 4,
+    width: "100%",
+    padding: 5,
   },
   empyListText: {
-   flex: 4,
-   width: '75%',
-   textAlign: 'center',
-   color: 'gray'
-  }
+    flex: 4,
+    width: "75%",
+    textAlign: "center",
+    color: "gray",
+  },
 });
